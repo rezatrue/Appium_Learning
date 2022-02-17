@@ -11,8 +11,9 @@ import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 
-public class Gestures extends Base{
 
+public class Gestures extends Base{
+	
 	public static void main(String[] args) throws MalformedURLException {
 		System.out.println("Hello .appium.... Gestures...");
 		AndroidDriver<AndroidElement> driver = Base.capabilities();
@@ -31,6 +32,12 @@ public class Gestures extends Base{
 		LongPressOptions longPressOptions = new LongPressOptions();
 		element = driver.findElementByXPath("//android.widget.TextView[@text='People Names']");
 		
+		
+		touchAction.longPress(
+				longPressOptions.withElement(
+						elementOption.element(element)).withDuration(Duration.ofSeconds(2)))
+												.release().perform();
+		
 		touchAction.longPress(
 				longPressOptions.withElement(
 						elementOption.element(element)).withDuration(Duration.ofSeconds(2)))
@@ -38,7 +45,7 @@ public class Gestures extends Base{
 		
 		System.out.println(driver.findElementById("android:id/title").isDisplayed());
 		
-		
+
 	}
 
 }

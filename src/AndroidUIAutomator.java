@@ -16,7 +16,6 @@ System.out.println("Welcome .... to... Android UI Automator...");
 		
 		System.out.println(driver.findElementsByAndroidUIAutomator("new UiSelector().clickable(true)").size());
 		
-
 	}
 	
 }
