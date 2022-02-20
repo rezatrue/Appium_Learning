@@ -11,7 +11,10 @@ public class App {
 	public static void main(String[] args) throws MalformedURLException {
 		System.out.println("Welcome .... to... Automation...");
 		
-		AndroidDriver<AndroidElement> driver = Base.capabilities();
+		//AndroidDriver<AndroidElement> driver = Base.capabilities();
+		// running on real devices
+		AndroidDriver<AndroidElement> driver = HybridBase.capabilities("real");
+		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.MILLISECONDS);
 		
 		//android.widget.TextView[@text='Preference']

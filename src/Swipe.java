@@ -10,12 +10,12 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 
-public class Swipe extends Base{
+public class Swipe extends HybridBase{
 
 	public static void main(String[] args) throws MalformedURLException {
 		System.out.println("Let's -- Swipe...");
 		
-		AndroidDriver<AndroidElement> driver = Base.capabilities();
+		AndroidDriver<AndroidElement> driver = HybridBase.capabilities("real");
 		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
 		
 		driver.findElementByXPath("//android.widget.TextView[@text='Views']").click();

@@ -2,6 +2,7 @@ import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import io.appium.java_client.TouchAction;
@@ -19,7 +20,19 @@ public class Gestures extends Base{
 		AndroidDriver<AndroidElement> driver = Base.capabilities();
 		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
 		
-		driver.findElementByXPath("//android.widget.TextView[@text='Views']").click();
+		WebElement viewElement = null;
+		try {
+			viewElement = driver.findElementByXPath("//android.widget.TextView[@text='Views']");
+			viewElement.click();
+		} catch (NoSuchElementException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Views\"));");
+			viewElement = driver.findElementByXPath("//android.widget.TextView[@text='Views']");
+			viewElement.click();
+		}
+		
+		
 		//Tap
 		TouchAction<?> touchAction = new TouchAction<>(driver);
 		TapOptions tapOp = new TapOptions();
@@ -38,10 +51,10 @@ public class Gestures extends Base{
 						elementOption.element(element)).withDuration(Duration.ofSeconds(2)))
 												.release().perform();
 		
-		touchAction.longPress(
-				longPressOptions.withElement(
-						elementOption.element(element)).withDuration(Duration.ofSeconds(2)))
-												.release().perform();
+//		touchAction.longPress(
+//				longPressOptions.withElement(
+//						elementOption.element(element)).withDuration(Duration.ofSeconds(2)))
+//												.release().perform();
 		
 		System.out.println(driver.findElementById("android:id/title").isDisplayed());
 		
